@@ -109,9 +109,9 @@ public class Ventana extends JFrame {//Ventana principal
             //------Contendido Frame Altas
 
             //------Iconos Frame Altas
-            ImageIcon iconoAgregar = new ImageIcon("src/imagenes/add.png");
-            ImageIcon iconoBorrar = new ImageIcon("src/imagenes/eraser.png");
-            ImageIcon iconoCancelar = new ImageIcon("src/imagenes/error.png");
+            ImageIcon iconoAgregar = new ImageIcon("imagenes/add.png");
+            ImageIcon iconoBorrar = new ImageIcon("imagenes/eraser.png");
+            ImageIcon iconoCancelar = new ImageIcon("imagenes/error.png");
             //------Iconos Frame Altas
 
             //------Configuracion de Componentes Frame Altas
