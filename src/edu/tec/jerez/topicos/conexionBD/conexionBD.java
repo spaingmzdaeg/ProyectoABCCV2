@@ -53,7 +53,7 @@ public class conexionBD {
         boolean ejecucion = true;
         try {
             stm = (Statement) conexion.createStatement();
-            stm.execute(sql);
+            stm.execute(sql);//executeUpdate -- execute
         }
         catch(SQLException e) {
             e.printStackTrace();

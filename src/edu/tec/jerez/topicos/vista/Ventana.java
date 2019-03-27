@@ -12,8 +12,8 @@ import java.sql.SQLException;
 
 public class Ventana extends JFrame {//Ventana principal
     //--------instancias
-    JTable tablaAlumnosAltas;
-    JInternalFrame internalFrameAltas;
+    JTable tablaAlumnosAltas,tablaAlumnosBajas;
+    JInternalFrame internalFrameAltas,internalFrameBajas;
     //--------instancias
 
     private static final long serialVersionUID = 1L;
@@ -45,6 +45,21 @@ public class Ventana extends JFrame {//Ventana principal
         menu.add(mAltas);
         //---------Menu Altas
 
+        //---------Menu Bajas
+        JMenu mBajas = new JMenu("Bajas");
+        JMenuItem itemBajas = new JMenuItem("Dar de Baja  un Alumno...");
+        itemBajas.setMnemonic(KeyEvent.VK_N);
+        itemBajas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+        itemBajas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                internalFrameBajas.setVisible(true);
+            }
+        });
+        mBajas.add(itemBajas);
+        menu.add(mBajas);
+        //---------Menu Bajas
+
         setJMenuBar(menu);//Agregar menu al panel principal.
 
 
@@ -66,6 +81,23 @@ public class Ventana extends JFrame {//Ventana principal
         panelEscritorio.add(internalFrameAltas);
         add(panelEscritorio, BorderLayout.CENTER);
         //----------Codigo Internal Frame Altas
+
+        //----------Codigo Internal Frame Bajas
+        internalFrameBajas = new JInternalFrame();
+        internalFrameBajas.setLayout(null);
+        internalFrameBajas.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        internalFrameBajas.setSize(800, 500);
+        internalFrameBajas.setResizable(true);
+        internalFrameBajas.setVisible(false);
+        internalFrameBajas.setClosable(true);
+        internalFrameBajas.setIconifiable(true);
+        internalFrameBajas.setMaximizable(true);
+        internalFrameBajas.setBackground(Color.black);
+
+        internalFrameBajas.add(metodoBajas());
+        panelEscritorio.add(internalFrameBajas);
+        add(panelEscritorio, BorderLayout.CENTER);
+        //----------Codigo Internal Frame Bajas
 
 
     }
@@ -246,7 +278,7 @@ public class Ventana extends JFrame {//Ventana principal
                             final String TABLA_ALUMNOS = "alumnos";
 
                             String driver = "com.mysql.jdbc.Driver";
-                            String url = "jdbc:mysql://localhost/bd_escuela";
+                            String url = "jdbc:mysql://localhost/bd_escuela_2";
                             String user = "root";
                             String password = "chesterf51997";
                             String query = "SELECT * FROM " + TABLA_ALUMNOS;
@@ -299,7 +331,238 @@ public class Ventana extends JFrame {//Ventana principal
 
 
             return altas;
-        }
+        }//fin jpanel altas
+
+    //------->Metodo Jpanel Bajas
+    public JPanel metodoBajas(){
+        JPanel bajas = new JPanel();
+        bajas.setLayout(null);
+        bajas.setSize(800, 500);
+        bajas.setBounds(0, 0, 800, 800);
+
+        //----barra titulo frame bajas
+        JPanel barra = new JPanel();
+        barra.setVisible(true);
+        barra.setLayout(null);
+        barra.setBackground(new Color(178, 46, 0));
+        barra.setSize(600, 600);
+        barra.setBounds(0, 0, 800, 70);
+        JLabel titulo = new JLabel("Bajas Alumnos");
+        titulo.setFont(new Font("ARIAL", Font.BOLD, 40));
+        titulo.setBounds(new Rectangle(25, 0, 600, 70));
+        barra.add(titulo);
+        bajas.add(barra);
+        //----barra titulo frame bajas
+
+        //---Contenido MetodoBajas
+        JLabel etiquetaNumControl = new JLabel("Numero de Control: ");
+        JLabel etiquetaNombre = new JLabel("Nombre(s):");
+        JLabel etiquetaApPaterno = new JLabel("Apellido Paterno: ");
+        JLabel etiquetaApMaterno = new JLabel("Apellido Materno: ");
+        JLabel etiquetaSemetre = new JLabel("Semestre: ");
+        JLabel etiquetaCarrera = new JLabel("Carrera: ");
+        JTextField entradaNumControl = new JTextField();
+        JTextField entradaNombre = new JTextField();
+        JTextField entradaApPaterno = new JTextField();
+        JTextField entradaApMaterno = new JTextField();
+        JComboBox<String> entradaSemestre = new JComboBox<String>();
+        JComboBox<String> entradaCarrera = new JComboBox<String>();
+        JButton botonBuscar = new JButton("");
+        JButton botonBorrar = new JButton("BORRAR");
+        JButton botonEliminar = new JButton("Eliminar");
+        JButton botonCancelar = new JButton("Cancelar");
+
+        //---Contenido MetodoBajas
+
+        //----Iconos metodo bajas
+        ImageIcon iconoBuscar = new ImageIcon("imagenes/lupa.png");
+        ImageIcon iconoBorrar = new ImageIcon("imagenes/eraser.png");
+        ImageIcon iconoCancelar = new ImageIcon("imagenes/error.png");
+        ImageIcon iconoEliminar = new ImageIcon("imagenes/delete.png");
+        //----Iconos metodo bajas
+
+        //----Configuracion metodo Bajas
+        Font letras = new Font("ARIAL", Font.BOLD, 20);
+        Font letras2 = new Font("ARIAL", Font.BOLD, 13);
+        etiquetaNumControl.setFont(letras);
+        etiquetaNombre.setFont(letras);
+        etiquetaApPaterno.setFont(letras);
+        etiquetaApMaterno.setFont(letras);
+        etiquetaSemetre.setFont(letras);
+        entradaSemestre.addItem("Elige Semestre");
+        entradaSemestre.addItem("1");
+        entradaSemestre.addItem("2");
+        entradaSemestre.addItem("3");
+        entradaSemestre.addItem("4");
+        entradaSemestre.addItem("5");
+        entradaSemestre.addItem("6");
+        entradaSemestre.addItem("7");
+        entradaSemestre.addItem("8");
+        entradaSemestre.addItem("9");
+        entradaSemestre.addItem("10");
+        entradaSemestre.addItem("11");
+        entradaSemestre.addItem("12");
+        etiquetaCarrera.setFont(letras);
+        entradaCarrera.addItem("Elige Carrera");
+        entradaCarrera.addItem("I.S.C.");
+        entradaCarrera.addItem("I.M.");
+        entradaCarrera.addItem("I.A.");
+        entradaCarrera.addItem("L.C.P.");
+        entradaCarrera.addItem("L.A.");
+        entradaNumControl.setFont(letras);
+        entradaNumControl.setBackground(new Color( 142, 196, 181));
+        entradaNombre.setFont(letras);
+        entradaApPaterno.setFont(letras);
+        entradaApMaterno.setFont(letras);
+        entradaSemestre.setFont(letras2);
+
+        entradaCarrera.setFont(letras2);
+        botonBuscar.setFont(letras2);
+        botonBuscar.setIcon(iconoBuscar);
+        botonBorrar.setFont(letras2);
+        botonBorrar.setIcon(iconoBorrar);
+        botonEliminar.setFont(letras2);
+        botonEliminar.setIcon(iconoEliminar);
+        botonCancelar.setFont(letras2);
+        botonCancelar.setIcon(iconoCancelar);
+        //----Configuracion metodo Bajas
+
+        //----Ubicacion componentes metodo Bajas
+        etiquetaNumControl.setBounds(new Rectangle(40, 70, 200, 70));
+        etiquetaNombre.setBounds(new Rectangle(20, 100, 180, 70));
+        etiquetaApPaterno.setBounds(new Rectangle(40, 130, 190, 70));
+        etiquetaApMaterno.setBounds(new Rectangle(40, 160, 190, 70));
+        etiquetaSemetre.setBounds(new Rectangle(40, 220, 120, 70));
+        etiquetaCarrera.setBounds(new Rectangle(40, 250, 100, 70));
+        entradaNumControl.setBounds(new Rectangle(230, 90, 200, 30));
+        entradaNombre.setBounds(new Rectangle(125, 120, 305, 30));
+        entradaApPaterno.setBounds(new Rectangle(210, 150, 220, 30));
+        entradaApMaterno.setBounds(new Rectangle(210, 183, 220, 30));
+        entradaSemestre.setBounds(new Rectangle(140, 238, 170, 30));
+        entradaCarrera.setBounds(new Rectangle(125, 270, 185, 30));
+        //botonAgregar.setBounds(new Rectangle(500, 90, 140, 30));
+        botonBorrar.setBounds(new Rectangle(500, 150, 120, 30));
+        botonCancelar.setBounds(new Rectangle(500, 210, 150, 30));
+
+
+        botonBuscar.setBounds(new Rectangle(450, 90, 30, 30));
+        botonEliminar.setBounds(new Rectangle(510, 90, 135, 30));
+
+        //----Ubicacion componentes metodo Bajas
+
+        //----Tabla metodo Bajas
+        JPanel tabla = new JPanel();
+        tabla.setVisible(true);
+        tabla.setLayout(null);
+        tabla.setSize(500, 150);
+        tabla.setBounds(80, 310, 500, 150);
+        tablaAlumnosBajas = new JTable();
+        tablaAlumnosBajas.setBounds(0, 0, 500, 150);
+        tablaAlumnosBajas.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][] {
+                }, new String []{"Num. Control", "Nombre", "Primer Ap", "Segundo Ap", "Semestre", "Carrera"}
+        ));
+        JScrollPane scrolltable = new JScrollPane();
+        scrolltable.setViewportView(tablaAlumnosBajas);
+        scrolltable.setSize(500, 150);
+        tabla.add(scrolltable);
+        //----Tabla metodo Bajas
+
+        //-----Insercion Componentes metodoBajas
+        bajas.add(etiquetaNumControl);
+        bajas.add(etiquetaNombre);
+        bajas.add(etiquetaApPaterno);
+        bajas.add(etiquetaApMaterno);
+        bajas.add(etiquetaSemetre);
+        bajas.add(etiquetaCarrera);
+        bajas.add(entradaNumControl);
+        bajas.add(entradaNombre);
+        bajas.add(entradaApPaterno);
+        bajas.add(entradaApMaterno);
+        bajas.add(entradaSemestre);
+        bajas.add(entradaCarrera);
+        bajas.add(botonBuscar);
+        bajas.add(botonBorrar);
+        bajas.add(botonEliminar);
+        bajas.add(botonCancelar);
+        bajas.add(tabla);
+        //-----Insercion Componentes metodoBajas
+
+        //-----Eventos metodoBajas
+        botonBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(entradaNumControl.getText().equals("")){
+                    JOptionPane.showMessageDialog(getContentPane(),"Ingrese numero de control","BUSCAR ALUMNO"
+                            ,JOptionPane.WARNING_MESSAGE);
+                }else {
+                    AlumnoDAO mAlumnoDAO = new AlumnoDAO();
+                    Alumno a = mAlumnoDAO.buscarAlumno(entradaNumControl.getText());
+
+                    entradaNumControl.setText(a.getNumControl());
+                    entradaNombre.setText(a.getNombre());
+                    entradaApPaterno.setText(a.getPrimerAp());
+                    entradaApMaterno.setText(a.getSegundoAp());
+                    //cajaEdad.setText(a.getEdad()+"");
+                    entradaSemestre.setSelectedItem(a.getSemestre() + "");
+                    entradaCarrera.setSelectedItem(a.getCarrera());
+                }
+            }
+        });
+        botonBorrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                entradaNumControl.setText("");
+                entradaNombre.setText("");
+                entradaApPaterno.setText("");
+                entradaApMaterno.setText("");
+                entradaSemestre.setSelectedItem("Elegir Semestre");
+                entradaCarrera.setSelectedItem("Elegir Carrera");
+
+            }
+        });
+        botonEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(entradaNumControl.getText().equals("")){
+                    JOptionPane.showMessageDialog(getContentPane(),"Ingrese numero de control","ELIMINAR ALUMNO"
+                            ,JOptionPane.WARNING_MESSAGE);
+                }else {
+
+                    String tNumControl = entradaNumControl.getText();
+                    AlumnoDAO mAlumnoDAO = new AlumnoDAO();
+                    if (mAlumnoDAO.eliminarRegistro(tNumControl)) {
+                        JOptionPane.showMessageDialog(getContentPane(), "Eliminacion Exito");
+                    } else
+                        JOptionPane.showMessageDialog(getContentPane(), "Eliminacion NO Exitosa");
+
+                    entradaNumControl.setText("");
+                    entradaNombre.setText("");
+                    entradaApPaterno.setText("");
+                    entradaApMaterno.setText("");
+                    entradaSemestre.setSelectedItem("Elige Semestre");
+                    entradaCarrera.setSelectedItem("Elige Carrera");
+                    //actualizarTabla();
+                }
+            }
+        });
+        botonCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                internalFrameBajas.setVisible(false);
+            }
+        });
+
+        return bajas;
+        //-----Eventos metodoBajas
+
+
+
+
+
+    }
 
 
     public static void main(String[] args) {//metodo principal
