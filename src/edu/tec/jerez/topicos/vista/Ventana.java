@@ -1,10 +1,14 @@
 package edu.tec.jerez.topicos.vista;
 
+import edu.tec.jerez.topicos.controlador.AlumnoDAO;
+import edu.tec.jerez.topicos.modelo.Alumno;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 
 public class Ventana extends JFrame {//Ventana principal
     //--------instancias
@@ -216,6 +220,78 @@ public class Ventana extends JFrame {//Ventana principal
             //------Insercion Componentes Frame Altas
 
             //------Eventos frame Altas
+            botonAgregar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    if (entradaNumControl.getText().equals("") || entradaNombre.getText().equals("") || entradaApPaterno.getText().equals("")
+                            || entradaApMaterno.getText().equals("") || (entradaSemestre.getSelectedItem() + "").equals("Elige Semestre")
+                            || (entradaCarrera.getSelectedItem() + "").equals("Elige Carrera")) {//validacion
+                        JOptionPane.showMessageDialog(getContentPane(), "Ningun Campo puede estar en blanco",
+                                "REGISTRO NO COMPLETADO",JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        Alumno a = new Alumno(entradaNumControl.getText(),
+                                entradaNombre.getText(),
+                                entradaApPaterno.getText(),
+                                entradaApMaterno.getText(),
+                                Byte.parseByte("18"),
+                                Byte.parseByte((String) entradaSemestre.getSelectedItem()),
+                                entradaCarrera.getSelectedItem() + "");
+
+                        AlumnoDAO mAlumnoDAO = new AlumnoDAO();
+
+                        if (mAlumnoDAO.insertarRegistros(a)) {
+                            JOptionPane.showMessageDialog(getContentPane(), "REGISTRO AGREGADO CORRECTAMENTE");
+
+                            final String TABLA_ALUMNOS = "alumnos";
+
+                            String driver = "com.mysql.jdbc.Driver";
+                            String url = "jdbc:mysql://localhost/bd_escuela";
+                            String user = "root";
+                            String password = "chesterf51997";
+                            String query = "SELECT * FROM " + TABLA_ALUMNOS;
+
+
+                           /* ResultSetTableModel modelo = null;
+                            try {
+                                modelo = new ResultSetTableModel(driver, url, user, password, query);
+                            } catch (SQLException e1) {
+                                e1.printStackTrace();
+                            } catch (ClassNotFoundException e1) {
+                                e1.printStackTrace();
+                            }
+                            actualizarTabla();*/
+                            entradaNumControl.setText("");
+                            entradaNombre.setText("");
+                            entradaApPaterno.setText("");
+                            entradaApMaterno.setText("");
+                            entradaSemestre.setSelectedItem("Elige Semestre");
+                            entradaCarrera.setSelectedItem("Elige Carrera");
+                        } else {
+                            JOptionPane.showMessageDialog(getContentPane(), "ERROR!!!!");
+                        }
+                    }
+                }
+            });
+            botonBorrar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    entradaNumControl.setText("");
+                    entradaNombre.setText("");
+                    entradaApPaterno.setText("");
+                    entradaApMaterno.setText("");
+                    entradaSemestre.setSelectedItem("Elige Semestre");
+                    entradaCarrera.setSelectedItem("Elige Carrera");
+                }
+            });
+            botonCancelar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    internalFrameAltas.setVisible(false);
+                }
+            });
+
+
             //------Eventos frame Altas
 
 

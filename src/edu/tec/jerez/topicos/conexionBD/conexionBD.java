@@ -16,7 +16,7 @@ public class conexionBD {
     public conexionBD(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost/bd_escuela";
+            String url = "jdbc:mysql://localhost/bd_escuela_2";
             conexion = DriverManager.getConnection(url, "root", "chesterf51997");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
