@@ -224,6 +224,34 @@ public class AlumnoDAO {
         return  completo;
     }
 
+    public boolean consultasPorEdad(String edad,JTable tabla){
+        boolean completo = true;
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        ResultSet rs = conexion.consultarRegistros("SELECT * FROM alumnos WHERE edad= '"+edad+"'");
+        // ResultSet rs = conexion.consultarRegistros("SELECT * FROM alumnos ");
+        modelo.setColumnIdentifiers( new Object[] {
+                "num. Control", "nombre", "primerAp", "segundoAp","edad", "Semestre", "Carrera"});
+
+
+        try{
+            while(rs.next()){
+                modelo.addRow(new Object[]{rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getByte(5),
+                        rs.getByte(6),
+                        rs.getString(7)});
+            }
+            tabla.setModel(modelo);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            completo = false;
+        }
+        return  completo;
+    }
+
     //metodos consultas
 
     public Alumno mostrarAlumno(String numControl){//no puesto en interfaz

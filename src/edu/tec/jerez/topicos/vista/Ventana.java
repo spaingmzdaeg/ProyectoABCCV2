@@ -179,10 +179,12 @@ public class Ventana extends JFrame{//ventana clase
         JLabel etiquetaApMaterno = new JLabel("Apellido Materno: ");
         JLabel etiquetaSemestre = new JLabel("Semestre: ");
         JLabel etiquetaCarrera = new JLabel("Carrera: ");
+        JLabel etiquetaEdad = new JLabel("Edad: ");
         JTextField entradaNumControl = new JTextField();
         JTextField entradaNombre = new JTextField();
         JTextField entradaApPaterno = new JTextField();
         JTextField entradaApMaterno = new JTextField();
+        JTextField entradaEdad = new JTextField();
         JComboBox<String> entradaSemestre = new JComboBox<String>();
         JComboBox<String> entradaCarrera  = new JComboBox<String>();
         JButton botonAgregar = new JButton("AGREGAR");
@@ -201,6 +203,7 @@ public class Ventana extends JFrame{//ventana clase
         etiquetaApMaterno.setFont(new Font("ARIAL", Font.BOLD, 20));
         etiquetaSemestre.setFont(new Font("ARIAL", Font.BOLD, 20));
         etiquetaCarrera.setFont(new Font("ARIAL", Font.BOLD, 20));
+        etiquetaEdad.setFont(new Font("ARIAL", Font.BOLD, 20));
         entradaNumControl.setFont(new Font("ARIAL", Font.BOLD, 20));
         entradaNombre.setFont(new Font("ARIAL", Font.BOLD, 20));
         entradaApPaterno.setFont(new Font("ARIAL", Font.BOLD, 20));
@@ -226,6 +229,7 @@ public class Ventana extends JFrame{//ventana clase
         entradaCarrera.addItem("I.A.");
         entradaCarrera.addItem("L.C.P.");
         entradaCarrera.addItem("L.A.");
+        entradaEdad.setFont(new Font("ARIAL", Font.ITALIC, 20));
         botonAgregar.setFont(new Font("ARIAL", Font.BOLD, 13));
         botonAgregar.setIcon(iconoAgregar);
         botonBorrar.setFont(new Font("ARIAL", Font.BOLD, 13));
@@ -240,12 +244,14 @@ public class Ventana extends JFrame{//ventana clase
         etiquetaApMaterno.setBounds(new Rectangle(40, 160, 190, 70));
         etiquetaSemestre.setBounds(new Rectangle(40, 220, 120, 70));
         etiquetaCarrera.setBounds(new Rectangle(40, 250, 100, 70));
+        etiquetaEdad.setBounds(new Rectangle(340, 250, 100, 70));
         entradaNumControl.setBounds(new Rectangle(230, 90, 200, 30));
         entradaNombre.setBounds(new Rectangle(125, 120, 305, 30));
         entradaApPaterno.setBounds(new Rectangle(210, 150, 220, 30));
         entradaApMaterno.setBounds(new Rectangle(210, 183, 220, 30));
         entradaSemestre.setBounds(new Rectangle(140, 238, 170, 30));
         entradaCarrera.setBounds(new Rectangle(125, 270, 185, 30));
+        entradaEdad.setBounds(new Rectangle(410, 270, 30, 30));
         botonAgregar.setBounds(new Rectangle(500, 90, 140, 30));
         botonBorrar.setBounds(new Rectangle(500, 150, 120, 30));
         botonCancelar.setBounds(new Rectangle(500, 210, 150, 30));
@@ -274,12 +280,14 @@ public class Ventana extends JFrame{//ventana clase
         altas.add(etiquetaApMaterno);
         altas.add(etiquetaSemestre);
         altas.add(etiquetaCarrera);
+        altas.add(etiquetaEdad);
         altas.add(entradaNumControl);
         altas.add(entradaNombre);
         altas.add(entradaApPaterno);
         altas.add(entradaApMaterno);
         altas.add(entradaSemestre);
         altas.add(entradaCarrera);
+        altas.add(entradaEdad);
         altas.add(botonAgregar);
         altas.add(botonBorrar);
         altas.add(botonCancelar);
@@ -292,7 +300,8 @@ public class Ventana extends JFrame{//ventana clase
 
                 if (entradaNumControl.getText().equals("") || entradaNombre.getText().equals("") || entradaApPaterno.getText().equals("")
                         || entradaApMaterno.getText().equals("") || (entradaSemestre.getSelectedItem() + "").equals("Elige Semestre")
-                        || (entradaCarrera.getSelectedItem() + "").equals("Elige Carrera")) {//validacion
+                        || (entradaCarrera.getSelectedItem() + "").equals("Elige Carrera") || entradaEdad.getText().equals("")
+                || entradaEdad.getText().equals("0")) {//validacion
                     JOptionPane.showMessageDialog(getContentPane(), "Ningun Campo puede estar en blanco",
                             "REGISTRO NO COMPLETADO",JOptionPane.WARNING_MESSAGE);
                 } else {
@@ -300,7 +309,7 @@ public class Ventana extends JFrame{//ventana clase
                             entradaNombre.getText(),
                             entradaApPaterno.getText(),
                             entradaApMaterno.getText(),
-                            Byte.parseByte("18"),
+                            Byte.parseByte(entradaEdad.getText()),
                             Byte.parseByte((String) entradaSemestre.getSelectedItem()),
                             entradaCarrera.getSelectedItem() + "");
 
@@ -397,6 +406,10 @@ public class Ventana extends JFrame{//ventana clase
         JButton botonEliminar = new JButton("Eliminar");
         JButton botonCancelar = new JButton("Cancelar");
 
+        JLabel etiquetaEdad = new JLabel("Edad: ");
+        JTextField entradaEdad = new JTextField();
+
+
         //------Iconos Frame Bajas
         ImageIcon iconoBuscar = new ImageIcon("imagenes/lupa.png");
         ImageIcon iconoBorrar = new ImageIcon("imagenes/eraser.png");
@@ -448,6 +461,9 @@ public class Ventana extends JFrame{//ventana clase
         botonCancelar.setFont(letras2);
         botonCancelar.setIcon(iconoCancelar);
 
+        etiquetaEdad.setFont(new Font("ARIAL", Font.BOLD, 20));
+        entradaEdad.setFont(new Font("ARIAL", Font.ITALIC, 20));
+
         //----------------Ubicacion Frame Bajas
 
         etiquetaNumControl.setBounds(new Rectangle(40, 70, 200, 70));
@@ -470,6 +486,8 @@ public class Ventana extends JFrame{//ventana clase
         botonBuscar.setBounds(new Rectangle(450, 90, 30, 30));
         botonEliminar.setBounds(new Rectangle(510, 90, 135, 30));
 
+        etiquetaEdad.setBounds(new Rectangle(340, 250, 100, 70));
+        entradaEdad.setBounds(new Rectangle(410, 270, 30, 30));
         //-----Tabla Frame Bajas
         JPanel tabla = new JPanel();
         tabla.setVisible(true);
@@ -505,8 +523,10 @@ public class Ventana extends JFrame{//ventana clase
         bajas.add(botonEliminar);
         bajas.add(botonCancelar);
         bajas.add(tabla);
+        bajas.add(etiquetaEdad);
+        bajas.add(entradaEdad);
 
-        //--------------Eventos Frame Altas
+        //--------------Eventos Frame Bajas
         botonBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -522,6 +542,7 @@ public class Ventana extends JFrame{//ventana clase
                     entradaNombre.setText(a.getNombre());
                     entradaApPaterno.setText(a.getPrimerAp());
                     entradaApMaterno.setText(a.getSegundoAp());
+                    entradaEdad.setText(String.valueOf(a.getEdad()));
                     //cajaEdad.setText(a.getEdad()+"");
                     entradaSemestre.setSelectedItem(a.getSemestre() + "");
                     entradaCarrera.setSelectedItem(a.getCarrera());
@@ -614,6 +635,10 @@ public class Ventana extends JFrame{//ventana clase
         JButton botonGuardar = new JButton("Guardar Cambios");
         JButton botonCancelar = new JButton("Cancelar");
 
+        JLabel etiquetaEdad = new JLabel("Edad: ");
+        JTextField entradaEdad = new JTextField();
+
+
         //-------Iconos Frame Modificaciones
         ImageIcon iconoBuscar = new ImageIcon("imagenes/lupa.png");
         ImageIcon iconoBorrar = new ImageIcon("imagenes/eraser.png");
@@ -664,6 +689,8 @@ public class Ventana extends JFrame{//ventana clase
         botonCancelar.setFont(letras2);
         botonCancelar.setIcon(iconoCancelar);
 
+        etiquetaEdad.setFont(new Font("ARIAL", Font.BOLD, 20));
+        entradaEdad.setFont(new Font("ARIAL", Font.ITALIC, 20));
         //------Ubicacion Jframe Modificaciones
 
         etiquetaNumControl.setBounds(new Rectangle(40, 70, 200, 70));
@@ -683,6 +710,9 @@ public class Ventana extends JFrame{//ventana clase
         botonCancelar.setBounds(new Rectangle(500, 210, 150, 30));
         botonBuscar.setBounds(new Rectangle(450, 90, 30, 30));
         botonGuardar.setBounds(new Rectangle(500, 90, 140, 30));
+
+        etiquetaEdad.setBounds(new Rectangle(340, 250, 100, 70));
+        entradaEdad.setBounds(new Rectangle(410, 270, 30, 30));
 
         //-----Jtable Frame Modificaciones
         JPanel tabla = new JPanel();
@@ -720,6 +750,9 @@ public class Ventana extends JFrame{//ventana clase
         modificaciones.add(botonCancelar);
         modificaciones.add(tabla);
 
+        modificaciones.add(etiquetaEdad);
+        modificaciones.add(entradaEdad);
+
         //----------Eventos Frame Modificaciones
         botonBuscar.addActionListener(new ActionListener() {
             @Override
@@ -736,6 +769,7 @@ public class Ventana extends JFrame{//ventana clase
                     entradaNombre.setText(a.getNombre());
                     entradaApPaterno.setText(a.getPrimerAp());
                     entradaApMaterno.setText(a.getSegundoAp());
+                    entradaEdad.setText(String.valueOf(a.getEdad()));
                     //cajaEdad.setText(a.getEdad()+"");
                     entradaSemestre.setSelectedItem(a.getSemestre() + "");
                     entradaCarrera.setSelectedItem(a.getCarrera());
@@ -761,7 +795,8 @@ public class Ventana extends JFrame{//ventana clase
 
                 if (entradaNumControl.getText().equals("") || entradaNombre.getText().equals("") || entradaApPaterno.getText().equals("")
                         || entradaApMaterno.getText().equals("") || (entradaSemestre.getSelectedItem() + "").equals("Elige Semestre")
-                        || (entradaCarrera.getSelectedItem() + "").equals("Elige Carrera")){
+                        || (entradaCarrera.getSelectedItem() + "").equals("Elige Carrera")|| entradaEdad.getText().equals("")
+                        || entradaEdad.getText().equals("0")){
                     JOptionPane.showMessageDialog(getContentPane(), "Ningun Campo puede estar en blanco",
                             "REGISTRO NO COMPLETADO",JOptionPane.WARNING_MESSAGE);
 
@@ -770,7 +805,7 @@ public class Ventana extends JFrame{//ventana clase
                             entradaNombre.getText(),
                             entradaApPaterno.getText(),
                             entradaApMaterno.getText(),
-                            Byte.parseByte(18 + ""),
+                            Byte.parseByte(entradaEdad.getText() + ""),
                             Byte.parseByte(entradaSemestre.getSelectedItem() + ""),
                             entradaCarrera.getSelectedItem() + "");
 
@@ -828,9 +863,11 @@ public class Ventana extends JFrame{//ventana clase
         JRadioButton apMaterno = new JRadioButton("Apellido Materno:");
         JRadioButton semestre = new JRadioButton("Semestre:");
         JRadioButton carrera = new JRadioButton("Carrera:");
+        JRadioButton edad = new JRadioButton("Edad:");
         JTextField entradaNombre = new JTextField();
         JTextField entradaApPaterno = new JTextField();
         JTextField entradaApMaterno = new JTextField();
+        JTextField entradaEdad = new JTextField();
         JComboBox<String> entradaSemestre = new JComboBox<String>();
         JComboBox<String> entradaCarrera = new JComboBox<String>();
         JButton botonBuscar = new JButton("");
@@ -850,9 +887,11 @@ public class Ventana extends JFrame{//ventana clase
         apMaterno.setFont(letras);
         semestre.setFont(letras);
         carrera.setFont(letras);
+        edad.setFont(letras);
         entradaNombre.setFont(letras);
         entradaApPaterno.setFont(letras);
         entradaApMaterno.setFont(letras);
+        entradaEdad.setFont(letras);
         entradaSemestre.setFont(letras);
         entradaSemestre.addItem("Elegir Semestre");
         entradaSemestre.addItem("1");
@@ -888,11 +927,13 @@ public class Ventana extends JFrame{//ventana clase
         apMaterno.setBounds(new Rectangle( 60, 200, 200, 30));
         semestre.setBounds(new Rectangle( 100, 250, 150, 30));
         carrera.setBounds(new Rectangle( 100, 300, 150, 30));
+        edad.setBounds(new Rectangle( 100, 350, 150, 30));
         entradaNombre.setBounds(new Rectangle(270, 100, 160, 30));
         entradaApPaterno.setBounds(new Rectangle(270, 150, 160, 30));
         entradaApMaterno.setBounds(new Rectangle(270, 200, 160, 30));
         entradaSemestre.setBounds(new Rectangle(270, 250, 160, 30));
         entradaCarrera.setBounds(new Rectangle(270, 300, 160, 30));
+        entradaEdad.setBounds(new Rectangle(270, 350, 30, 30));
         botonBuscar.setBounds(new Rectangle(470, 150, 70, 30));
         botonBorrar.setBounds(new Rectangle(470, 200, 70, 30));
         botonCancelar.setBounds(new Rectangle(470, 250, 70, 30));
@@ -902,7 +943,7 @@ public class Ventana extends JFrame{//ventana clase
         tabla.setVisible(true);
         tabla.setLayout(null);
         tabla.setSize(500, 150);
-        tabla.setBounds(80, 340, 500, 150);
+        tabla.setBounds(80, 400, 500, 150);
         tablaAlumnosConsultas = new JTable();
         tablaAlumnosConsultas.setBounds(0, 0, 500, 150);
         tablaAlumnosConsultas.setModel(new javax.swing.table.DefaultTableModel(
@@ -930,6 +971,9 @@ public class Ventana extends JFrame{//ventana clase
         consultas.add(botonBuscar);
         consultas.add(botonBorrar);
         consultas.add(botonCancelar);
+
+        consultas.add(edad);
+        consultas.add(entradaEdad);
 
         //-------Eventos Frame Consultas
         botonBorrar.addActionListener(new ActionListener() {
@@ -976,6 +1020,9 @@ public class Ventana extends JFrame{//ventana clase
                 else if(carrera.isSelected()){
                     dato = (String)entradaCarrera.getSelectedItem();
                     alumnoDAO.consultasPorCarrera(dato,tablaAlumnosConsultas);
+                }else if(edad.isSelected()){
+                    dato = entradaEdad.getText();
+                    alumnoDAO.consultasPorEdad(dato,tablaAlumnosConsultas);
                 }
 
 
