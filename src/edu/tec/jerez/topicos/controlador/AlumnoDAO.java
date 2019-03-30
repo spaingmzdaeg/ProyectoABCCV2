@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 
 
 public class AlumnoDAO {
@@ -222,6 +222,61 @@ public class AlumnoDAO {
             completo = false;
         }
         return  completo;
+    }
+
+    //metodos consultas
+
+    public Alumno mostrarAlumno(String numControl){//no puesto en interfaz
+        Alumno alumno = null;
+        String sql = "SELECT * FROM alumnos WHERE carrera= '"+numControl+"'";
+        ResultSet rs = conexion.consultarRegistros(sql);
+
+        try {
+            rs.last();
+            alumno.setNumControl(rs.getString(1));
+            alumno.setNombre(rs.getString(2));
+            alumno.setPrimerAp(rs.getString(3));
+            alumno.setSegundoAp(rs.getString(3));
+            alumno.setEdad(rs.getByte(5));
+            alumno.setSemestre(rs.getByte(6));
+            alumno.setCarrera(rs.getString(7));
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+        return alumno;
+    }
+
+    public ArrayList<Alumno> mostrarAlumnos(String numControl){//no puesto en interfaz
+        ArrayList<Alumno> listaAlumnos = new ArrayList<>();
+
+        Alumno alumno = null;
+        String sql = "SELECT * FROM alumnos WHERE numControl= '"+numControl+"'";
+        ResultSet rs = conexion.consultarRegistros(sql);
+
+        try{
+            while(rs.next()){
+                alumno.setNumControl(rs.getString(1));
+                alumno.setNombre(rs.getString(2));
+                alumno.setPrimerAp(rs.getString(3));
+                alumno.setSegundoAp(rs.getString(3));
+                alumno.setEdad(rs.getByte(5));
+                alumno.setSemestre(rs.getByte(6));
+                alumno.setCarrera(rs.getString(7));
+
+                listaAlumnos.add(alumno);
+            }
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+
+        }
+
+
+
+
+        return listaAlumnos;
     }
 
 }

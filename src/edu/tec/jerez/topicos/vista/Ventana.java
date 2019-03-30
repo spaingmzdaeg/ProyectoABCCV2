@@ -995,7 +995,31 @@ public class Ventana extends JFrame{//ventana clase
 
     public void actualizarTabla(){
 
-        final String TABLA_ALUMNOS = "alumnos";
+        final String TABLA_ALUMNOS = "alumnos";//esto pede ser parametro
+
+        String driver = "com.mysql.jdbc.Driver";
+        String url = "jdbc:mysql://localhost/bd_escuela_2";
+        String user = "root";
+        String password = "chesterf51997";
+        String query = "SELECT * FROM " + TABLA_ALUMNOS;
+
+        ResultSetTableModel modelo = null;
+        try {
+            modelo = new ResultSetTableModel(driver, url, user, password, query);
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        } catch (ClassNotFoundException e1) {
+            e1.printStackTrace();
+        }
+
+        tablaAlumnosAltas.setModel(modelo);
+        tablaAlumnosBajas.setModel(modelo);
+        tablaAlumnosModificaciones.setModel(modelo);
+        tablaAlumnosConsultas.setModel(modelo);
+    }
+
+    public void actualizarTabla2(JTable tabla){
+        final String TABLA_ALUMNOS = "alumnos";//CONSTANTE TABLA
 
         String driver = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost/bd_escuela_2";
@@ -1016,6 +1040,10 @@ public class Ventana extends JFrame{//ventana clase
         tablaAlumnosBajas.setModel(modelo);
         tablaAlumnosModificaciones.setModel(modelo);
         //tablaAlumnosConsultas.setModel(modelo);
+
+
+
+
     }
 
 
@@ -1025,12 +1053,14 @@ public class Ventana extends JFrame{//ventana clase
 
 
     public static void main(String[] args) {
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new Ventana();
             }
         });
+
     }
 
 
