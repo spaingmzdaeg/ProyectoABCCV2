@@ -837,6 +837,8 @@ public class Ventana extends JFrame{//ventana clase
 
     public JPanel metodoConsultas() {//metodo Consultas
 
+
+
         JPanel consultas = new JPanel();
         consultas.setLayout(null);
         consultas.setSize(600, 600);
@@ -856,6 +858,9 @@ public class Ventana extends JFrame{//ventana clase
         consultas.add(barra);
 
         //------Componentes Frame Consultas
+
+        ButtonGroup bg = new ButtonGroup();
+
         JRadioButton todos = new JRadioButton("Todos");
 
         JRadioButton nombre = new JRadioButton("Nombre:");
@@ -864,10 +869,21 @@ public class Ventana extends JFrame{//ventana clase
         JRadioButton semestre = new JRadioButton("Semestre:");
         JRadioButton carrera = new JRadioButton("Carrera:");
         JRadioButton edad = new JRadioButton("Edad:");
+
+        //-----agregar radio buttons al botton group
+        bg.add(todos);
+        bg.add(nombre);
+        bg.add(apMaterno);
+        bg.add(apPaterno);
+        bg.add(semestre);
+        bg.add(carrera);
+        bg.add(edad);
+
         JTextField entradaNombre = new JTextField();
         JTextField entradaApPaterno = new JTextField();
         JTextField entradaApMaterno = new JTextField();
         JTextField entradaEdad = new JTextField();
+        JLabel etiquetaFalla = new JLabel("Registro no encontrado.");
         JComboBox<String> entradaSemestre = new JComboBox<String>();
         JComboBox<String> entradaCarrera = new JComboBox<String>();
         JButton botonBuscar = new JButton("");
@@ -922,6 +938,10 @@ public class Ventana extends JFrame{//ventana clase
 
         //-------Ubicacion Frame Consultas
         todos.setBounds(new Rectangle( 460, 100, 100, 30));
+        etiquetaFalla.setBounds(new Rectangle( 560, 100, 220, 30));
+        etiquetaFalla.setForeground(Color.red);
+        etiquetaFalla.setFont(new Font("ARIAL",Font.BOLD,18));
+        etiquetaFalla.setVisible(false);
         nombre.setBounds(new Rectangle( 100, 100, 120, 30));
         apPaterno.setBounds(new Rectangle( 60, 150, 200, 30));
         apMaterno.setBounds(new Rectangle( 60, 200, 200, 30));
@@ -974,6 +994,7 @@ public class Ventana extends JFrame{//ventana clase
 
         consultas.add(edad);
         consultas.add(entradaEdad);
+        consultas.add(etiquetaFalla);
 
         //-------Eventos Frame Consultas
         botonBorrar.addActionListener(new ActionListener() {
@@ -989,40 +1010,61 @@ public class Ventana extends JFrame{//ventana clase
         botonBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-				/*
-				AlumnoDAO mAlumnoDAO = new AlumnoDAO();
-				Alumno a = mAlumnoDAO.buscarAlumno(entradaNumControl.getText());
-
-				entradaNumControl.setText(a.getNumControl());
-				entradaNombre.setText(a.getNombre());
-				entradaApPaterno.setText(a.getPrimerAp());
-				entradaApMaterno.setText(a.getSegundoAp());
-
-				entradaSemestre.setSelectedItem(a.getSemestre()+"");
-				entradaCarrera.setSelectedItem(a.getCarrera());
-				*/
 
                 AlumnoDAO alumnoDAO = new AlumnoDAO();
                 String dato = "";
+
                 if(nombre.isSelected()){
                     dato = entradaNombre.getText();
-                    alumnoDAO.consultasPorNombre(dato,tablaAlumnosConsultas);
+                    boolean consultaRealizada = alumnoDAO.consultasPorNombre(dato,tablaAlumnosConsultas);
+                    if(consultaRealizada == false){
+                        etiquetaFalla.setVisible(true);
+                    }else{
+                        etiquetaFalla.setVisible(false);
+                    }
                 }else if(apPaterno.isSelected()){
                     dato = entradaApPaterno.getText();
-                    alumnoDAO.consultasPorApaterno(dato,tablaAlumnosConsultas);
+                   boolean consultaRealizada = alumnoDAO.consultasPorApaterno(dato,tablaAlumnosConsultas);
+                    if(consultaRealizada == false){
+                        etiquetaFalla.setVisible(true);
+                    }else{
+                        etiquetaFalla.setVisible(false);
+                    }
+
                 }else if(apMaterno.isSelected()){
                     dato = entradaApMaterno.getText();
-                    alumnoDAO.consultasPorAmaterno(dato,tablaAlumnosConsultas);
+                    boolean consultaRealizada = alumnoDAO.consultasPorAmaterno(dato,tablaAlumnosConsultas);
+                    if(consultaRealizada == false){
+                        etiquetaFalla.setVisible(true);
+                    }else{
+                        etiquetaFalla.setVisible(false);
+                    }
+
                 }else if(semestre.isSelected()){
                     dato = (String)entradaSemestre.getSelectedItem();
-                    alumnoDAO.consultasPorSemestre(dato,tablaAlumnosConsultas);
+                   boolean consultaRealizada = alumnoDAO.consultasPorSemestre(dato,tablaAlumnosConsultas);
+                   if(consultaRealizada == false){
+                       etiquetaFalla.setVisible(true);
+                   }else{
+                       etiquetaFalla.setVisible(false);
+                   }
                 }
                 else if(carrera.isSelected()){
                     dato = (String)entradaCarrera.getSelectedItem();
-                    alumnoDAO.consultasPorCarrera(dato,tablaAlumnosConsultas);
+                    boolean consultaRealizada = alumnoDAO.consultasPorCarrera(dato,tablaAlumnosConsultas);
+                    if(consultaRealizada == false){
+                        etiquetaFalla.setVisible(true);
+                    }else{
+                        etiquetaFalla.setVisible(false);
+                    }
                 }else if(edad.isSelected()){
                     dato = entradaEdad.getText();
-                    alumnoDAO.consultasPorEdad(dato,tablaAlumnosConsultas);
+                    boolean consultaRealizada = alumnoDAO.consultasPorEdad(dato,tablaAlumnosConsultas);
+                    if(consultaRealizada == false){
+                        etiquetaFalla.setVisible(true);
+                    }else{
+                        etiquetaFalla.setVisible(false);
+                    }
                 }
 
 
@@ -1034,6 +1076,15 @@ public class Ventana extends JFrame{//ventana clase
             @Override
             public void actionPerformed(ActionEvent e) {
                 internalFrameConsultas.setVisible(false);
+            }
+        });
+
+        todos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarTabla();
+                etiquetaFalla.setVisible(false);
+
             }
         });
 

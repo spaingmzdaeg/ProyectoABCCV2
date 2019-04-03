@@ -85,14 +85,13 @@ public class AlumnoDAO {
     }
 
     public boolean consultasPorNombre(String nombre,JTable tabla){
-        boolean completo = true;
+        boolean completo = false;
 
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet rs = conexion.consultarRegistros("SELECT * FROM alumnos WHERE Nombre= '"+nombre+"'");
         // ResultSet rs = conexion.consultarRegistros("SELECT * FROM alumnos ");
         modelo.setColumnIdentifiers( new Object[] {
                 "num. Control", "nombre", "primerAp", "segundoAp","edad", "Semestre", "Carrera"});
-
 
         try{
             while(rs.next()){
@@ -103,6 +102,7 @@ public class AlumnoDAO {
                         rs.getByte(5),
                         rs.getByte(6),
                         rs.getString(7)});
+                completo = true;
             }
             tabla.setModel(modelo);
         }catch (Exception e){
@@ -113,7 +113,7 @@ public class AlumnoDAO {
     }
 
     public boolean consultasPorApaterno(String ap,JTable tabla){
-        boolean completo = true;
+        boolean completo = false;
 
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet rs = conexion.consultarRegistros("SELECT * FROM alumnos WHERE primerAp= '"+ap+"'");
@@ -131,6 +131,7 @@ public class AlumnoDAO {
                         rs.getByte(5),
                         rs.getByte(6),
                         rs.getString(7)});
+                completo = true;
             }
             tabla.setModel(modelo);
         }catch (Exception e){
@@ -141,7 +142,7 @@ public class AlumnoDAO {
     }
 
     public boolean consultasPorAmaterno(String am,JTable tabla){
-        boolean completo = true;
+        boolean completo = false;
 
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet rs = conexion.consultarRegistros("SELECT * FROM alumnos WHERE segundoAp= '"+am+"'");
@@ -159,17 +160,18 @@ public class AlumnoDAO {
                         rs.getByte(5),
                         rs.getByte(6),
                         rs.getString(7)});
+                completo = true;
             }
             tabla.setModel(modelo);
         }catch (Exception e){
             System.out.println(e.getMessage());
-            completo = false;
+            completo = true;
         }
         return  completo;
     }
 
     public boolean consultasPorSemestre(String semestre,JTable tabla){
-        boolean completo = true;
+        boolean completo = false;
 
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet rs = conexion.consultarRegistros("SELECT * FROM alumnos WHERE semestre= '"+semestre+"'");
@@ -191,13 +193,13 @@ public class AlumnoDAO {
             tabla.setModel(modelo);
         }catch (Exception e){
             System.out.println(e.getMessage());
-            completo = false;
+            completo = true;
         }
         return  completo;
     }
 
     public boolean consultasPorCarrera(String carrera,JTable tabla){
-        boolean completo = true;
+        boolean completo = false;
 
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet rs = conexion.consultarRegistros("SELECT * FROM alumnos WHERE carrera= '"+carrera+"'");
@@ -215,6 +217,7 @@ public class AlumnoDAO {
                         rs.getByte(5),
                         rs.getByte(6),
                         rs.getString(7)});
+                completo = true;
             }
             tabla.setModel(modelo);
         }catch (Exception e){
@@ -225,7 +228,7 @@ public class AlumnoDAO {
     }
 
     public boolean consultasPorEdad(String edad,JTable tabla){
-        boolean completo = true;
+        boolean completo = false;
 
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet rs = conexion.consultarRegistros("SELECT * FROM alumnos WHERE edad= '"+edad+"'");
@@ -243,6 +246,7 @@ public class AlumnoDAO {
                         rs.getByte(5),
                         rs.getByte(6),
                         rs.getString(7)});
+                completo = true;
             }
             tabla.setModel(modelo);
         }catch (Exception e){
