@@ -1088,6 +1088,43 @@ public class Ventana extends JFrame{//ventana clase
             }
         });
 
+        nombre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                entradaNombre.requestFocus();
+            }
+        });
+
+        apPaterno.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                entradaApPaterno.requestFocus();
+            }
+        });
+
+        apMaterno.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                entradaApMaterno.requestFocus();
+            }
+        });
+
+        semestre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                entradaSemestre.requestFocus();
+            }
+        });
+
+        carrera.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                entradaCarrera.requestFocus();
+            }
+        });
+
+
+
         return consultas;
     }
 
