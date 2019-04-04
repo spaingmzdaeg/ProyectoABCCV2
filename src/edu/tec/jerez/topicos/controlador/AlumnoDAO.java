@@ -15,8 +15,10 @@ public class AlumnoDAO {
     conexionBD conexion = new conexionBD();
     final String conexionTabla = "alumnos";
 
-    //METODOS DE ABCC (ALTAS, BAJAS, CAMBIOS y CONSULTAS
-    //CRUD (CREATE, READ, UPDATE and DELETE
+    /*
+    METODOS DE ABCC (ALTAS, BAJAS, CAMBIOS y CONSULTAS
+    CRUD (CREATE, READ, UPDATE and DELETE
+    */
 
     public boolean insertarRegistros(Alumno alumno) {
         boolean resultado;

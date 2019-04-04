@@ -191,7 +191,9 @@ es decir, si trabajamos serializando/deserializando
         JTextField entradaNombre = new JTextField();
         JTextField entradaApPaterno = new JTextField();
         JTextField entradaApMaterno = new JTextField();
-        JTextField entradaEdad = new JTextField();
+       // JTextField entradaEdad = new JTextField();
+        JSpinner entradaEdad = new JSpinner();
+        entradaEdad.setEditor(new JSpinner.DefaultEditor(entradaEdad));//esto no permite que el spinner puda ser modificado
         JComboBox<String> entradaSemestre = new JComboBox<String>();
         JComboBox<String> entradaCarrera  = new JComboBox<String>();
         JButton botonAgregar = new JButton("AGREGAR");
@@ -258,7 +260,7 @@ es decir, si trabajamos serializando/deserializando
         entradaApMaterno.setBounds(new Rectangle(210, 183, 220, 30));
         entradaSemestre.setBounds(new Rectangle(140, 238, 170, 30));
         entradaCarrera.setBounds(new Rectangle(125, 270, 185, 30));
-        entradaEdad.setBounds(new Rectangle(410, 270, 30, 30));
+        entradaEdad.setBounds(new Rectangle(410, 270, 45, 30));
         botonAgregar.setBounds(new Rectangle(500, 90, 140, 30));
         botonBorrar.setBounds(new Rectangle(500, 150, 120, 30));
         botonCancelar.setBounds(new Rectangle(500, 210, 150, 30));
@@ -307,8 +309,8 @@ es decir, si trabajamos serializando/deserializando
 
                 if (entradaNumControl.getText().equals("") || entradaNombre.getText().equals("") || entradaApPaterno.getText().equals("")
                         || entradaApMaterno.getText().equals("") || (entradaSemestre.getSelectedItem() + "").equals("Elige Semestre")
-                        || (entradaCarrera.getSelectedItem() + "").equals("Elige Carrera") || entradaEdad.getText().equals("")
-                || entradaEdad.getText().equals("0")) {//validacion
+                        || (entradaCarrera.getSelectedItem() + "").equals("Elige Carrera") || entradaEdad.getValue().toString().equals("")
+                || entradaEdad.getValue().toString().equals("0")) {//validacion
                     JOptionPane.showMessageDialog(getContentPane(), "Ningun Campo puede estar en blanco",
                             "REGISTRO NO COMPLETADO",JOptionPane.WARNING_MESSAGE);
                 } else {
@@ -316,7 +318,7 @@ es decir, si trabajamos serializando/deserializando
                             entradaNombre.getText(),
                             entradaApPaterno.getText(),
                             entradaApMaterno.getText(),
-                            Byte.parseByte(entradaEdad.getText()),
+                            Byte.parseByte(entradaEdad.getValue().toString()),
                             Byte.parseByte((String) entradaSemestre.getSelectedItem()),
                             entradaCarrera.getSelectedItem() + "");
 
@@ -414,7 +416,8 @@ es decir, si trabajamos serializando/deserializando
         JButton botonCancelar = new JButton("Cancelar");
 
         JLabel etiquetaEdad = new JLabel("Edad: ");
-        JTextField entradaEdad = new JTextField();
+        JSpinner entradaEdad = new JSpinner();
+        entradaEdad.setEditor(new JSpinner.DefaultEditor(entradaEdad));//esto no permite que el spinner puda ser modificado
 
 
         //------Iconos Frame Bajas
@@ -494,7 +497,7 @@ es decir, si trabajamos serializando/deserializando
         botonEliminar.setBounds(new Rectangle(510, 90, 135, 30));
 
         etiquetaEdad.setBounds(new Rectangle(340, 250, 100, 70));
-        entradaEdad.setBounds(new Rectangle(410, 270, 30, 30));
+        entradaEdad.setBounds(new Rectangle(410, 270, 45, 30));
         //-----Tabla Frame Bajas
         JPanel tabla = new JPanel();
         tabla.setVisible(true);
@@ -549,7 +552,8 @@ es decir, si trabajamos serializando/deserializando
                     entradaNombre.setText(a.getNombre());
                     entradaApPaterno.setText(a.getPrimerAp());
                     entradaApMaterno.setText(a.getSegundoAp());
-                    entradaEdad.setText(String.valueOf(a.getEdad()));
+                   // entradaEdad.setText(String.valueOf(a.getEdad()));
+                    entradaEdad.setValue((a.getEdad()));
                     //cajaEdad.setText(a.getEdad()+"");
                     entradaSemestre.setSelectedItem(a.getSemestre() + "");
                     entradaCarrera.setSelectedItem(a.getCarrera());
@@ -643,7 +647,10 @@ es decir, si trabajamos serializando/deserializando
         JButton botonCancelar = new JButton("Cancelar");
 
         JLabel etiquetaEdad = new JLabel("Edad: ");
-        JTextField entradaEdad = new JTextField();
+        //JTextField entradaEdad = new JTextField();
+
+        JSpinner entradaEdad = new JSpinner();
+        entradaEdad.setEditor(new JSpinner.DefaultEditor(entradaEdad));//esto no permite que el spinner puda ser modificado
 
 
         //-------Iconos Frame Modificaciones
@@ -719,7 +726,7 @@ es decir, si trabajamos serializando/deserializando
         botonGuardar.setBounds(new Rectangle(500, 90, 140, 30));
 
         etiquetaEdad.setBounds(new Rectangle(340, 250, 100, 70));
-        entradaEdad.setBounds(new Rectangle(410, 270, 30, 30));
+        entradaEdad.setBounds(new Rectangle(410, 270, 45, 30));
 
         //-----Jtable Frame Modificaciones
         JPanel tabla = new JPanel();
@@ -776,7 +783,7 @@ es decir, si trabajamos serializando/deserializando
                     entradaNombre.setText(a.getNombre());
                     entradaApPaterno.setText(a.getPrimerAp());
                     entradaApMaterno.setText(a.getSegundoAp());
-                    entradaEdad.setText(String.valueOf(a.getEdad()));
+                    entradaEdad.setValue(a.getEdad());
                     //cajaEdad.setText(a.getEdad()+"");
                     entradaSemestre.setSelectedItem(a.getSemestre() + "");
                     entradaCarrera.setSelectedItem(a.getCarrera());
@@ -802,8 +809,8 @@ es decir, si trabajamos serializando/deserializando
 
                 if (entradaNumControl.getText().equals("") || entradaNombre.getText().equals("") || entradaApPaterno.getText().equals("")
                         || entradaApMaterno.getText().equals("") || (entradaSemestre.getSelectedItem() + "").equals("Elige Semestre")
-                        || (entradaCarrera.getSelectedItem() + "").equals("Elige Carrera")|| entradaEdad.getText().equals("")
-                        || entradaEdad.getText().equals("0")){
+                        || (entradaCarrera.getSelectedItem() + "").equals("Elige Carrera")|| entradaEdad.getValue().toString().equals("")
+                        || entradaEdad.getValue().toString().equals("0")){
                     JOptionPane.showMessageDialog(getContentPane(), "Ningun Campo puede estar en blanco",
                             "REGISTRO NO COMPLETADO",JOptionPane.WARNING_MESSAGE);
 
@@ -812,7 +819,7 @@ es decir, si trabajamos serializando/deserializando
                             entradaNombre.getText(),
                             entradaApPaterno.getText(),
                             entradaApMaterno.getText(),
-                            Byte.parseByte(entradaEdad.getText() + ""),
+                            Byte.parseByte(entradaEdad.getValue() + ""),
                             Byte.parseByte(entradaSemestre.getSelectedItem() + ""),
                             entradaCarrera.getSelectedItem() + "");
 
@@ -889,8 +896,11 @@ es decir, si trabajamos serializando/deserializando
         JTextField entradaNombre = new JTextField();
         JTextField entradaApPaterno = new JTextField();
         JTextField entradaApMaterno = new JTextField();
-        JTextField entradaEdad = new JTextField();
+        //JTextField entradaEdad = new JTextField();
         JLabel etiquetaFalla = new JLabel("Registro no encontrado.");
+
+        JSpinner entradaEdad = new JSpinner();
+        entradaEdad.setEditor(new JSpinner.DefaultEditor(entradaEdad));//esto no permite que el spinner puda ser modificado
         JComboBox<String> entradaSemestre = new JComboBox<String>();
         JComboBox<String> entradaCarrera = new JComboBox<String>();
         JButton botonBuscar = new JButton("");
@@ -960,7 +970,7 @@ es decir, si trabajamos serializando/deserializando
         entradaApMaterno.setBounds(new Rectangle(270, 200, 160, 30));
         entradaSemestre.setBounds(new Rectangle(270, 250, 160, 30));
         entradaCarrera.setBounds(new Rectangle(270, 300, 160, 30));
-        entradaEdad.setBounds(new Rectangle(270, 350, 30, 30));
+        entradaEdad.setBounds(new Rectangle(270, 350, 45, 30));
         botonBuscar.setBounds(new Rectangle(470, 150, 70, 30));
         botonBorrar.setBounds(new Rectangle(470, 200, 70, 30));
         botonCancelar.setBounds(new Rectangle(470, 250, 70, 30));
@@ -1065,7 +1075,7 @@ es decir, si trabajamos serializando/deserializando
                         etiquetaFalla.setVisible(false);
                     }
                 }else if(edad.isSelected()){
-                    dato = entradaEdad.getText();
+                    dato = entradaEdad.getValue().toString();
                     boolean consultaRealizada = alumnoDAO.consultasPorEdad(dato,tablaAlumnosConsultas);
                     if(consultaRealizada == false){
                         etiquetaFalla.setVisible(true);
