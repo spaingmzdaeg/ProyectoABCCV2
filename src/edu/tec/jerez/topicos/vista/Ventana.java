@@ -13,6 +13,13 @@ import java.sql.SQLException;
 public class Ventana extends JFrame{//ventana clase
     JTable tablaAlumnosAltas, tablaAlumnosBajas, tablaAlumnosModificaciones, tablaAlumnosConsultas;
     JInternalFrame internalFrameAltas, internalFrameBajas, internalFrameModificaciones, internalFrameConsultas;
+/*
+Si la clase no especifica un serialVersionUID el proceso de serializacion  calculará un
+serialVersionUID por defecto, basandose en varios aspectos de la clase.
+Es muy recomendable que se declare un serialVersionUID en las clases serializables, ya que el calculo del serialVersoinUID es muy sensible a detalles de la clase, los cuales pueden variar entre compiladores,
+es decir, si trabajamos serializando/deserializando
+ */
+
 
     private static final long serialVersionUID = 1L;
 
@@ -208,7 +215,7 @@ public class Ventana extends JFrame{//ventana clase
         entradaNombre.setFont(new Font("ARIAL", Font.BOLD, 20));
         entradaApPaterno.setFont(new Font("ARIAL", Font.BOLD, 20));
         entradaApMaterno.setFont(new Font("ARIAL", Font.BOLD, 20));
-        entradaSemestre.setFont(new Font("ARIAL", Font.ITALIC, 20));
+        entradaSemestre.setFont(new Font("ARIAL", Font.BOLD, 20));
         entradaSemestre.addItem("Elige Semestre");
         entradaSemestre.addItem("1");
         entradaSemestre.addItem("2");
@@ -222,14 +229,14 @@ public class Ventana extends JFrame{//ventana clase
         entradaSemestre.addItem("10");
         entradaSemestre.addItem("11");
         entradaSemestre.addItem("12");
-        entradaCarrera.setFont(new Font("ARIAL", Font.ITALIC, 20));
+        entradaCarrera.setFont(new Font("ARIAL", Font.BOLD, 20));
         entradaCarrera.addItem("Elige Carrera");
         entradaCarrera.addItem("I.S.C.");
         entradaCarrera.addItem("I.M.");
         entradaCarrera.addItem("I.A.");
         entradaCarrera.addItem("L.C.P.");
         entradaCarrera.addItem("L.A.");
-        entradaEdad.setFont(new Font("ARIAL", Font.ITALIC, 20));
+        entradaEdad.setFont(new Font("ARIAL", Font.BOLD, 20));
         botonAgregar.setFont(new Font("ARIAL", Font.BOLD, 13));
         botonAgregar.setIcon(iconoAgregar);
         botonBorrar.setFont(new Font("ARIAL", Font.BOLD, 13));
@@ -449,9 +456,9 @@ public class Ventana extends JFrame{//ventana clase
         entradaNombre.setFont(letras);
         entradaApPaterno.setFont(letras);
         entradaApMaterno.setFont(letras);
-        entradaSemestre.setFont(letras2);
+        entradaSemestre.setFont(letras);
 
-        entradaCarrera.setFont(letras2);
+        entradaCarrera.setFont(letras);
         botonBuscar.setFont(letras2);
         botonBuscar.setIcon(iconoBuscar);
         botonBorrar.setFont(letras2);
@@ -690,7 +697,7 @@ public class Ventana extends JFrame{//ventana clase
         botonCancelar.setIcon(iconoCancelar);
 
         etiquetaEdad.setFont(new Font("ARIAL", Font.BOLD, 20));
-        entradaEdad.setFont(new Font("ARIAL", Font.ITALIC, 20));
+        entradaEdad.setFont(new Font("ARIAL", Font.BOLD, 20));
         //------Ubicacion Jframe Modificaciones
 
         etiquetaNumControl.setBounds(new Rectangle(40, 70, 200, 70));

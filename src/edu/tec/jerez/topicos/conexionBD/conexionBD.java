@@ -37,7 +37,8 @@ public class conexionBD {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        /*finally {
+        /* otra forma
+        finally {
             try {
                 conexion.close();
             } catch (SQLException e) {

@@ -19,7 +19,7 @@ public class AlumnoDAO {
     //CRUD (CREATE, READ, UPDATE and DELETE
 
     public boolean insertarRegistros(Alumno alumno) {
-        boolean resultado = false;
+        boolean resultado;
 
         String instruccionSQL = "INSERT INTO alumnos VALUES('"+ alumno.getNumControl()
                 +"', '"+alumno.getNombre()
@@ -31,18 +31,24 @@ public class AlumnoDAO {
                 +"')";
 
         resultado = conexion.ejecutarInstruccionSQL(instruccionSQL);
+        conexion.cerrarConexion();
 
         return resultado;
     }
 
     public boolean eliminarRegistro(String numControl){
+        boolean resultado;
 
         String sql = "DELETE FROM "+conexionTabla+" WHERE NumControl= '"+numControl+"'";
 
-        return conexion.ejecutarInstruccionSQL(sql);
+        resultado = conexion.ejecutarInstruccionSQL(sql);
+        conexion.cerrarConexion();
+        return resultado;
     }
 
     public boolean actualizarRegistro(Alumno alumno){
+
+        boolean resultado;
 
         //UPDATE alumnos_SET Nombre = ''....
         String sql = "UPDATE "+conexionTabla+" SET Nombre = '" +alumno.getNombre()
@@ -53,7 +59,10 @@ public class AlumnoDAO {
                 +", Carrera = '"+alumno.getCarrera()
                 +"' WHERE NumControl = '"+alumno.getNumControl()+"'";
 
-        return conexion.ejecutarInstruccionSQL(sql);
+        resultado = conexion.ejecutarInstruccionSQL(sql);
+        conexion.cerrarConexion();
+
+        return resultado;
     }
 
     public Alumno buscarAlumno(String numControl){
@@ -105,6 +114,7 @@ public class AlumnoDAO {
                 completo = true;
             }
             tabla.setModel(modelo);
+            conexion.cerrarConexion();
         }catch (Exception e){
             System.out.println(e.getMessage());
             completo = false;
@@ -134,6 +144,7 @@ public class AlumnoDAO {
                 completo = true;
             }
             tabla.setModel(modelo);
+            conexion.cerrarConexion();
         }catch (Exception e){
             System.out.println(e.getMessage());
             completo = false;
@@ -163,6 +174,7 @@ public class AlumnoDAO {
                 completo = true;
             }
             tabla.setModel(modelo);
+            conexion.cerrarConexion();
         }catch (Exception e){
             System.out.println(e.getMessage());
             completo = true;
@@ -191,6 +203,7 @@ public class AlumnoDAO {
                         rs.getString(7)});
             }
             tabla.setModel(modelo);
+            conexion.cerrarConexion();
         }catch (Exception e){
             System.out.println(e.getMessage());
             completo = true;
@@ -220,6 +233,7 @@ public class AlumnoDAO {
                 completo = true;
             }
             tabla.setModel(modelo);
+            conexion.cerrarConexion();
         }catch (Exception e){
             System.out.println(e.getMessage());
             completo = false;
@@ -249,6 +263,7 @@ public class AlumnoDAO {
                 completo = true;
             }
             tabla.setModel(modelo);
+            conexion.cerrarConexion();
         }catch (Exception e){
             System.out.println(e.getMessage());
             completo = false;

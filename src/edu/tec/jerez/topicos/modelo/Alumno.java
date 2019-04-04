@@ -1,7 +1,7 @@
 package edu.tec.jerez.topicos.modelo;
 
 public class Alumno {
-    //Atributos
+
     private String numControl;
     private String nombre;
     private String primerAp;
@@ -10,7 +10,7 @@ public class Alumno {
     private byte semestre;
     private String carrera;
 
-    //Constructores
+
     public Alumno() {}
     public Alumno(String numControl, String nombre, String primerAp, String segundoAp, byte edad,
                   byte semestre, String carrera) {
@@ -23,7 +23,7 @@ public class Alumno {
         this.carrera = carrera;
     }
 
-    //GETTERS
+
     public String getNumControl(){return numControl;}
     public String getNombre(){return nombre;}
     public String getPrimerAp(){return primerAp;}
@@ -32,7 +32,7 @@ public class Alumno {
     public byte getSemestre(){return semestre;}
     public String getCarrera(){return carrera;}
 
-    //SETTERS
+
     public void setNumControl(String numControl){this.numControl = numControl;}
     public void setNombre(String nombre){this.nombre = nombre;}
     public void setPrimerAp(String primerAp){this.primerAp = primerAp;}
@@ -41,7 +41,7 @@ public class Alumno {
     public void setSemestre(byte semestre){	this.semestre = semestre;}
     public void setCarrera(String carrera){this.carrera = carrera;}
 
-    //toString
+
     @Override
     public String toString() {
         return "Alumno [numControl=" + numControl + ", nombre=" + nombre + ", primerAp=" + primerAp + ","
@@ -49,8 +49,5 @@ public class Alumno {
                 + carrera + "]";
     }
 
-    //OTROS METODOS
-    public boolean registrarInscripcion() {
-        return false;
-    }
+
 }
