@@ -297,7 +297,7 @@ public class AlumnoDAO {
         return alumno;
     }
 
-    public ArrayList<Alumno> mostrarAlumnos(String numControl){//no puesto en interfaz
+    public ArrayList<Alumno> mostrarAlumnos(String numControl){//no puesto en interfaz Luego implementacip
         ArrayList<Alumno> listaAlumnos = new ArrayList<>();
 
         Alumno alumno = null;
